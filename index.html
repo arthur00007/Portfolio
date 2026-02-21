@@ -1,35 +1,686 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Prithwish Kumar Das | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Prithwish Kumar Das — Frontend Developer, Open Source Contributor, Linux User. Crafting immersive digital experiences." />
+  <meta name="keywords" content="Prithwish Kumar Das, developer, portfolio, frontend, javascript, python, open source, linux, techno main salt lake" />
+  <meta name="author" content="Prithwish Kumar Das" />
+  <meta property="og:title" content="Prithwish Kumar Das — Portfolio" />
+  <meta property="og:description" content="Frontend Developer · Open Source Contributor · Linux User" />
+  <meta property="og:type" content="website" />
+  <title>Prithwish Kumar Das — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <canvas id="bg-canvas"></canvas>
-  <div class="container">
-    <header>
-      <h1>Prithwish Kumar Das</h1>
-      <p>2nd Year BCA Student</p>
-      <p>Techno Main Saltlake</p>
-    </header>
-    <main>
-      <section>
-        <h2>About Me</h2>
-        <p>
-          Hi! I'm Prithwish Kumar Das, currently pursuing my Bachelor of Computer Applications (BCA) at Techno Main Saltlake. I am passionate about web development and programming, and love exploring new technologies.
-        </p>
-      </section>
-      <section>
-        <h2>Contact</h2>
-        <ul>
-          <li>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
-          <li>LinkedIn: <a href="#" target="_blank">Your LinkedIn</a></li>
-        </ul>
-      </section>
-    </main>
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-trail" id="cursorTrail" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__logo">
+      <span class="nav__logo-bracket">[</span>
+      <span class="nav__logo-text">PKD</span>
+      <span class="nav__logo-bracket">]</span>
+    </div>
+    <ul class="nav__links" role="list">
+      <li><a href="#identity" class="nav__link" data-text="IDENTITY">IDENTITY</a></li>
+      <li><a href="#skills" class="nav__link" data-text="SKILLS">SKILLS</a></li>
+      <li><a href="#projects" class="nav__link" data-text="PROJECTS">PROJECTS</a></li>
+      <li><a href="#contact" class="nav__link" data-text="CONTACT">CONTACT</a></li>
+    </ul>
+    <button class="nav__menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+    <ul role="list">
+      <li><a href="#identity" class="mobile-menu__link">IDENTITY</a></li>
+      <li><a href="#skills" class="mobile-menu__link">SKILLS</a></li>
+      <li><a href="#projects" class="mobile-menu__link">PROJECTS</a></li>
+      <li><a href="#contact" class="mobile-menu__link">CONTACT</a></li>
+    </ul>
   </div>
+
+  <main>
+    <!-- ═══════════════════════════════════════════ -->
+    <!--  SCENE 01 — HERO                           -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="hero" id="hero" aria-label="Hero introduction">
+      <!-- Particle Canvas -->
+      <canvas class="hero__canvas" id="particleCanvas" aria-hidden="true"></canvas>
+
+      <!-- Background Grid -->
+      <div class="hero__grid" aria-hidden="true"></div>
+
+      <!-- Floating Orbs -->
+      <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--3" aria-hidden="true"></div>
+
+      <!-- Scan Lines -->
+      <div class="hero__scanlines" aria-hidden="true"></div>
+
+      <!-- Content -->
+      <div class="hero__content">
+        <div class="hero__tag">
+          <span class="hero__tag-dot"></span>
+          <span>ONLINE · READY</span>
+        </div>
+
+        <h1 class="hero__name" aria-label="Prithwish Kumar Das">
+          <span class="hero__name-line" data-text="PRITHWISH">PRITHWISH</span>
+          <span class="hero__name-line hero__name-line--accent" data-text="KUMAR DAS">KUMAR DAS</span>
+        </h1>
+
+        <div class="hero__role" aria-live="polite">
+          <span class="hero__role-prefix">[ </span>
+          <span class="hero__role-text" id="typingText" aria-label="Current role"></span>
+          <span class="hero__role-cursor" aria-hidden="true">█</span>
+          <span class="hero__role-prefix"> ]</span>
+        </div>
+
+        <p class="hero__sub">
+          Crafting immersive digital experiences at the intersection of<br />
+          <em>design precision</em> and <em>engineering depth.</em>
+        </p>
+
+        <div class="hero__cta-group">
+          <a href="#identity" class="hero__cta hero__cta--primary" aria-label="Explore portfolio">
+            <span class="hero__cta-icon" aria-hidden="true">◈</span>
+            <span>ENTER</span>
+            <span class="hero__cta-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="#projects" class="hero__cta hero__cta--ghost" aria-label="View projects">
+            <span>VIEW WORK</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero__scroll" aria-label="Scroll down">
+        <span class="hero__scroll-text">SCROLL</span>
+        <div class="hero__scroll-line" aria-hidden="true"></div>
+      </div>
+
+      <!-- Corner decorations -->
+      <div class="hero__corner hero__corner--tl" aria-hidden="true"></div>
+      <div class="hero__corner hero__corner--tr" aria-hidden="true"></div>
+      <div class="hero__corner hero__corner--bl" aria-hidden="true"></div>
+      <div class="hero__corner hero__corner--br" aria-hidden="true"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!--  SCENE 02 — IDENTITY                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="identity" id="identity" aria-label="Identity and about">
+      <div class="container">
+        <div class="section-label" aria-hidden="true">
+          <span>02</span><span>IDENTITY</span>
+        </div>
+
+        <div class="identity__layout">
+          <!-- Left: Dossier Card -->
+          <div class="identity__dossier reveal-left">
+            <div class="dossier__header">
+              <div class="dossier__status">
+                <span class="dossier__status-dot"></span>
+                <span>DOSSIER · CLASSIFIED</span>
+              </div>
+              <div class="dossier__id">ID-001</div>
+            </div>
+
+            <div class="dossier__avatar-wrap">
+              <div class="dossier__avatar" aria-hidden="true">
+                <div class="dossier__avatar-ring dossier__avatar-ring--1"></div>
+                <div class="dossier__avatar-ring dossier__avatar-ring--2"></div>
+                <div class="dossier__avatar-inner">
+                  <span class="dossier__avatar-glyph" aria-hidden="true">{ }</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dossier__stats">
+              <div class="dossier__stat">
+                <span class="dossier__stat-key">CODENAME</span>
+                <span class="dossier__stat-val">PRITHWISH KUMAR DAS</span>
+              </div>
+              <div class="dossier__stat">
+                <span class="dossier__stat-key">CLASS</span>
+                <span class="dossier__stat-val">DEVELOPER · 2ND YEAR</span>
+              </div>
+              <div class="dossier__stat">
+                <span class="dossier__stat-key">INSTITUTE</span>
+                <span class="dossier__stat-val">TECHNO MAIN SALT LAKE</span>
+              </div>
+              <div class="dossier__stat">
+                <span class="dossier__stat-key">OS</span>
+                <span class="dossier__stat-val">ARCH / CAHYOS</span>
+              </div>
+              <div class="dossier__stat">
+                <span class="dossier__stat-key">STATUS</span>
+                <span class="dossier__stat-val dossier__stat-val--active">STUDENT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Narrative -->
+          <div class="identity__narrative reveal-right">
+            <div class="identity__chapter">
+              <span class="identity__chapter-num">CH.01</span>
+              <h2 class="identity__heading">Origin<br /><em>Story</em></h2>
+            </div>
+
+            <div class="identity__text">
+              <p>
+                Started as curiosity — a terminal window, a blinking cursor, and an endless need to
+                understand <em>how things work</em>. What began as tinkering evolved into a craft.
+              </p>
+              <p>
+                I build interfaces that breathe, systems that respond, and experiences that stay with you
+                long after you close the tab. Every pixel is a decision. Every interaction, a conversation.
+              </p>
+            </div>
+
+            <div class="identity__philosophy">
+              <div class="philosophy__card" data-hover="REVEAL">
+                <div class="philosophy__icon" aria-hidden="true">⬡</div>
+                <h3>Engineering Depth</h3>
+                <p>Performance, architecture, and clean abstractions — not just making it work, making it last.</p>
+                <div class="philosophy__hidden">
+                  <span>Clean code is not a style. It's respect.</span>
+                </div>
+              </div>
+              <div class="philosophy__card" data-hover="REVEAL">
+                <div class="philosophy__icon" aria-hidden="true">◈</div>
+                <h3>Design Intuition</h3>
+                <p>Interfaces aren't just functional — they carry emotion, rhythm, and intention.</p>
+                <div class="philosophy__hidden">
+                  <span>If it doesn't feel right, it isn't.</span>
+                </div>
+              </div>
+              <div class="philosophy__card" data-hover="REVEAL">
+                <div class="philosophy__icon" aria-hidden="true">⬢</div>
+                <h3>Open Source Soul</h3>
+                <p>Build in public. Share relentlessly. Knowledge compounds when it flows freely.</p>
+                <div class="philosophy__hidden">
+                  <span>Good code deserves to be seen.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Focus areas -->
+            <div class="identity__focus">
+              <span class="identity__focus-label">FOCUS</span>
+              <div class="identity__tags">
+                <span class="tag">Frontend</span>
+                <span class="tag">Open Source</span>
+                <span class="tag">Linux</span>
+                <span class="tag">Anime</span>
+                <span class="tag">Gaming</span>
+                <span class="tag">Systems</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!--  SCENE 03 — SKILLS                         -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="skills" id="skills" aria-label="Skills and abilities">
+      <div class="container">
+        <div class="section-label" aria-hidden="true">
+          <span>03</span><span>ABILITY SYSTEM</span>
+        </div>
+
+        <div class="skills__header reveal-up">
+          <h2 class="skills__title">Skill<br /><em>Registry</em></h2>
+          <p class="skills__sub">Each ability forged through real-world deployment.</p>
+        </div>
+
+        <!-- Radar Chart -->
+        <div class="skills__radar-wrap reveal-up">
+          <canvas class="skills__radar" id="radarCanvas" width="380" height="380" aria-label="Skills radar chart"></canvas>
+          <div class="skills__radar-labels" aria-hidden="true">
+            <span class="radar-label" style="--angle: 0deg">HTML</span>
+            <span class="radar-label" style="--angle: 72deg">CSS</span>
+            <span class="radar-label" style="--angle: 144deg">JS</span>
+            <span class="radar-label" style="--angle: 216deg">Python</span>
+            <span class="radar-label" style="--angle: 288deg">C</span>
+          </div>
+        </div>
+
+        <!-- Skill Cards Grid -->
+        <div class="skills__grid" role="list" aria-label="Skill cards">
+          <!-- HTML -->
+          <article class="skill-card reveal-up" role="listitem" data-skill="95" data-delay="0">
+            <div class="skill-card__top">
+              <div class="skill-card__icon" aria-hidden="true">
+                <span>&lt;/&gt;</span>
+              </div>
+              <div class="skill-card__meta">
+                <span class="skill-card__rank">S</span>
+                <span class="skill-card__rank-label">RANK</span>
+              </div>
+            </div>
+            <h3 class="skill-card__name">HTML5</h3>
+            <p class="skill-card__desc">Semantic, accessible, and structured. The backbone of every experience.</p>
+            <div class="skill-card__meter" aria-label="HTML proficiency 95%">
+              <div class="skill-card__meter-track">
+                <div class="skill-card__meter-fill" data-width="95"></div>
+              </div>
+              <span class="skill-card__percent">95%</span>
+            </div>
+            <div class="skill-card__tags">
+              <span>Semantics</span><span>A11y</span><span>SEO</span>
+            </div>
+            <div class="skill-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- CSS -->
+          <article class="skill-card reveal-up" role="listitem" data-skill="90" data-delay="100">
+            <div class="skill-card__top">
+              <div class="skill-card__icon" aria-hidden="true">
+                <span>{ }</span>
+              </div>
+              <div class="skill-card__meta">
+                <span class="skill-card__rank">S</span>
+                <span class="skill-card__rank-label">RANK</span>
+              </div>
+            </div>
+            <h3 class="skill-card__name">CSS3</h3>
+            <p class="skill-card__desc">Motion, layout, and depth. Turning design specs into breathing reality.</p>
+            <div class="skill-card__meter" aria-label="CSS proficiency 90%">
+              <div class="skill-card__meter-track">
+                <div class="skill-card__meter-fill" data-width="90"></div>
+              </div>
+              <span class="skill-card__percent">90%</span>
+            </div>
+            <div class="skill-card__tags">
+              <span>Animation</span><span>Grid</span><span>Flexbox</span>
+            </div>
+            <div class="skill-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- JavaScript -->
+          <article class="skill-card reveal-up" role="listitem" data-skill="88" data-delay="200">
+            <div class="skill-card__top">
+              <div class="skill-card__icon" aria-hidden="true">
+                <span>JS</span>
+              </div>
+              <div class="skill-card__meta">
+                <span class="skill-card__rank skill-card__rank--a">A</span>
+                <span class="skill-card__rank-label">RANK</span>
+              </div>
+            </div>
+            <h3 class="skill-card__name">JavaScript</h3>
+            <p class="skill-card__desc">The language of the web. Vanilla first, always. Logic meets behavior.</p>
+            <div class="skill-card__meter" aria-label="JavaScript proficiency 88%">
+              <div class="skill-card__meter-track">
+                <div class="skill-card__meter-fill" data-width="88"></div>
+              </div>
+              <span class="skill-card__percent">88%</span>
+            </div>
+            <div class="skill-card__tags">
+              <span>ES2024</span><span>DOM</span><span>Async</span>
+            </div>
+            <div class="skill-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- Python -->
+          <article class="skill-card reveal-up" role="listitem" data-skill="82" data-delay="300">
+            <div class="skill-card__top">
+              <div class="skill-card__icon" aria-hidden="true">
+                <span>Py</span>
+              </div>
+              <div class="skill-card__meta">
+                <span class="skill-card__rank skill-card__rank--a">A</span>
+                <span class="skill-card__rank-label">RANK</span>
+              </div>
+            </div>
+            <h3 class="skill-card__name">Python</h3>
+            <p class="skill-card__desc">Scripting, automation, and algorithmic thinking at high velocity.</p>
+            <div class="skill-card__meter" aria-label="Python proficiency 82%">
+              <div class="skill-card__meter-track">
+                <div class="skill-card__meter-fill" data-width="82"></div>
+              </div>
+              <span class="skill-card__percent">82%</span>
+            </div>
+            <div class="skill-card__tags">
+              <span>Scripts</span><span>CLI</span><span>Automation</span>
+            </div>
+            <div class="skill-card__glow" aria-hidden="true"></div>
+          </article>
+
+          <!-- C -->
+          <article class="skill-card reveal-up" role="listitem" data-skill="75" data-delay="400">
+            <div class="skill-card__top">
+              <div class="skill-card__icon" aria-hidden="true">
+                <span>C</span>
+              </div>
+              <div class="skill-card__meta">
+                <span class="skill-card__rank skill-card__rank--b">B</span>
+                <span class="skill-card__rank-label">RANK</span>
+              </div>
+            </div>
+            <h3 class="skill-card__name">C Programming</h3>
+            <p class="skill-card__desc">Low-level mastery. Memory management, systems programming, and raw power.</p>
+            <div class="skill-card__meter" aria-label="C programming proficiency 75%">
+              <div class="skill-card__meter-track">
+                <div class="skill-card__meter-fill" data-width="75"></div>
+              </div>
+              <span class="skill-card__percent">75%</span>
+            </div>
+            <div class="skill-card__tags">
+              <span>Memory</span><span>Pointers</span><span>Systems</span>
+            </div>
+            <div class="skill-card__glow" aria-hidden="true"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!--  SCENE 04 — PROJECTS                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="projects" id="projects" aria-label="Projects showcase">
+      <div class="container">
+        <div class="section-label" aria-hidden="true">
+          <span>04</span><span>PROJECTS</span>
+        </div>
+
+        <div class="projects__header reveal-up">
+          <h2 class="projects__title">Selected<br /><em>Work</em></h2>
+          <p class="projects__sub">Three missions. Each one intentional.</p>
+        </div>
+
+        <div class="projects__grid">
+          <!-- Project 01 -->
+          <article class="project-card reveal-up" data-index="01" aria-label="Project: Neural Interface Dashboard">
+            <div class="project-card__inner">
+              <div class="project-card__bg" aria-hidden="true">
+                <div class="project-card__bg-grid"></div>
+                <div class="project-card__bg-orb"></div>
+              </div>
+
+              <div class="project-card__header">
+                <span class="project-card__num" aria-hidden="true">01</span>
+                <div class="project-card__status">
+                  <span class="project-card__dot"></span>
+                  <span>LIVE</span>
+                </div>
+              </div>
+
+              <div class="project-card__body">
+                <h3 class="project-card__title">Neural Interface<br />Dashboard</h3>
+                <p class="project-card__desc">
+                  A real-time data visualization platform built with pure JavaScript and WebSocket
+                  integration. Features live metrics, animated chart rendering, and adaptive grid layouts.
+                </p>
+
+                <div class="project-card__stack" aria-label="Tech stack">
+                  <span class="stack-tag">HTML5</span>
+                  <span class="stack-tag">CSS3</span>
+                  <span class="stack-tag">JavaScript</span>
+                  <span class="stack-tag">WebSocket</span>
+                </div>
+              </div>
+
+              <div class="project-card__footer">
+                <a href="#" class="project-btn project-btn--primary" aria-label="View Neural Interface Dashboard demo">
+                  <span>DEMO</span>
+                  <span class="project-btn__arrow" aria-hidden="true">↗</span>
+                </a>
+                <a href="#" class="project-btn project-btn--ghost" aria-label="View Neural Interface Dashboard source code">
+                  <span>SOURCE</span>
+                </a>
+              </div>
+
+              <div class="project-card__depth" aria-hidden="true"></div>
+            </div>
+          </article>
+
+          <!-- Project 02 -->
+          <article class="project-card project-card--featured reveal-up" data-index="02" aria-label="Project: Phantom CLI">
+            <div class="project-card__inner">
+              <div class="project-card__bg" aria-hidden="true">
+                <div class="project-card__bg-grid"></div>
+                <div class="project-card__bg-orb"></div>
+              </div>
+
+              <div class="project-card__header">
+                <span class="project-card__num" aria-hidden="true">02</span>
+                <div class="project-card__status project-card__status--featured">
+                  <span class="project-card__dot"></span>
+                  <span>FEATURED</span>
+                </div>
+              </div>
+
+              <div class="project-card__body">
+                <h3 class="project-card__title">Phantom<br />CLI Toolkit</h3>
+                <p class="project-card__desc">
+                  Open-source command-line toolkit for Linux power users. Automates dev environment
+                  setup, dotfile management, and system configuration with 500+ GitHub stars.
+                </p>
+
+                <div class="project-card__stack" aria-label="Tech stack">
+                  <span class="stack-tag">Python</span>
+                  <span class="stack-tag">Bash</span>
+                  <span class="stack-tag">Linux</span>
+                  <span class="stack-tag">Open Source</span>
+                </div>
+              </div>
+
+              <div class="project-card__footer">
+                <a href="#" class="project-btn project-btn--primary" aria-label="View Phantom CLI demo">
+                  <span>DEMO</span>
+                  <span class="project-btn__arrow" aria-hidden="true">↗</span>
+                </a>
+                <a href="#" class="project-btn project-btn--ghost" aria-label="View Phantom CLI source code">
+                  <span>SOURCE</span>
+                </a>
+              </div>
+
+              <div class="project-card__depth" aria-hidden="true"></div>
+            </div>
+          </article>
+
+          <!-- Project 03 -->
+          <article class="project-card reveal-up" data-index="03" aria-label="Project: Resonance UI Kit">
+            <div class="project-card__inner">
+              <div class="project-card__bg" aria-hidden="true">
+                <div class="project-card__bg-grid"></div>
+                <div class="project-card__bg-orb"></div>
+              </div>
+
+              <div class="project-card__header">
+                <span class="project-card__num" aria-hidden="true">03</span>
+                <div class="project-card__status">
+                  <span class="project-card__dot"></span>
+                  <span>LIVE</span>
+                </div>
+              </div>
+
+              <div class="project-card__body">
+                <h3 class="project-card__title">Resonance<br />UI Kit</h3>
+                <p class="project-card__desc">
+                  A handcrafted component library of animated, cinematic UI elements. Built entirely
+                  in vanilla HTML, CSS, and JS. No dependencies. Production-ready.
+                </p>
+
+                <div class="project-card__stack" aria-label="Tech stack">
+                  <span class="stack-tag">HTML5</span>
+                  <span class="stack-tag">CSS3</span>
+                  <span class="stack-tag">JavaScript</span>
+                  <span class="stack-tag">C</span>
+                </div>
+              </div>
+
+              <div class="project-card__footer">
+                <a href="#" class="project-btn project-btn--primary" aria-label="View Resonance UI Kit demo">
+                  <span>DEMO</span>
+                  <span class="project-btn__arrow" aria-hidden="true">↗</span>
+                </a>
+                <a href="#" class="project-btn project-btn--ghost" aria-label="View Resonance UI Kit source code">
+                  <span>SOURCE</span>
+                </a>
+              </div>
+
+              <div class="project-card__depth" aria-hidden="true"></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!--  SCENE 05 — CONTACT                        -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="contact" id="contact" aria-label="Contact terminal">
+      <div class="container">
+        <div class="section-label" aria-hidden="true">
+          <span>05</span><span>TERMINAL</span>
+        </div>
+
+        <div class="contact__layout">
+          <!-- Left: Info -->
+          <div class="contact__info reveal-left">
+            <h2 class="contact__title">Final<br /><em>Transmission</em></h2>
+            <p class="contact__sub">
+              Ready to collaborate, contribute, or create something that hasn't existed before.
+              Initiate contact.
+            </p>
+
+            <div class="contact__links">
+              <a href="https://github.com/arthur00007" target="_blank" rel="noopener noreferrer" class="contact__link" aria-label="GitHub profile">
+                <span class="contact__link-icon" aria-hidden="true">⬡</span>
+                <span>github.com/arthur00007</span>
+              </a>
+            </div>
+
+            <!-- Availability status -->
+            <div class="contact__availability">
+              <div class="availability__indicator">
+                <span class="availability__dot"></span>
+                <span>STUDENT · OPEN TO COLLABORATE</span>
+              </div>
+              <p>Open to internships, hackathons, and open-source collaboration.</p>
+            </div>
+          </div>
+
+          <!-- Right: Form -->
+          <div class="contact__form-wrap reveal-right">
+            <div class="terminal">
+              <div class="terminal__header">
+                <div class="terminal__dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <span class="terminal__title">MISSION_BRIEF.sh</span>
+                <span class="terminal__status">● ACTIVE</span>
+              </div>
+
+              <form class="terminal__form" id="contactForm" name="contact" method="POST" data-netlify="true" novalidate aria-label="Contact form">
+                <input type="hidden" name="form-name" value="contact" />
+                <div class="form-field" id="fieldName">
+                  <label class="form-field__label" for="inputName">
+                    <span class="form-field__prefix" aria-hidden="true">→ </span>NAME
+                  </label>
+                  <input
+                    class="form-field__input"
+                    id="inputName"
+                    type="text"
+                    name="name"
+                    placeholder="Enter codename..."
+                    autocomplete="name"
+                    aria-required="true"
+                  />
+                  <div class="form-field__error" role="alert" aria-live="polite"></div>
+                  <div class="form-field__line" aria-hidden="true"></div>
+                </div>
+
+                <div class="form-field" id="fieldEmail">
+                  <label class="form-field__label" for="inputEmail">
+                    <span class="form-field__prefix" aria-hidden="true">→ </span>EMAIL
+                  </label>
+                  <input
+                    class="form-field__input"
+                    id="inputEmail"
+                    type="email"
+                    name="email"
+                    placeholder="Enter signal frequency..."
+                    autocomplete="email"
+                    aria-required="true"
+                  />
+                  <div class="form-field__error" role="alert" aria-live="polite"></div>
+                  <div class="form-field__line" aria-hidden="true"></div>
+                </div>
+
+                <div class="form-field" id="fieldMessage">
+                  <label class="form-field__label" for="inputMessage">
+                    <span class="form-field__prefix" aria-hidden="true">→ </span>MESSAGE
+                  </label>
+                  <textarea
+                    class="form-field__input form-field__input--textarea"
+                    id="inputMessage"
+                    name="message"
+                    rows="5"
+                    placeholder="Encode your transmission..."
+                    aria-required="true"
+                  ></textarea>
+                  <div class="form-field__error" role="alert" aria-live="polite"></div>
+                  <div class="form-field__line" aria-hidden="true"></div>
+                </div>
+
+                <button class="form-submit" type="submit" id="submitBtn" aria-label="Send message">
+                  <span class="form-submit__text">TRANSMIT</span>
+                  <span class="form-submit__icon" aria-hidden="true">◈</span>
+                  <div class="form-submit__loader" aria-hidden="true"></div>
+                </button>
+              </form>
+
+              <!-- Success State -->
+              <div class="terminal__success" id="formSuccess" aria-live="polite" aria-hidden="true">
+                <div class="success__icon" aria-hidden="true">◈</div>
+                <h3>TRANSMISSION RECEIVED</h3>
+                <p>Signal confirmed. Expect contact within 24h.</p>
+                <div class="success__lines" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__left">
+        <span class="footer__logo">[PKD]</span>
+        <span class="footer__copy">© 2026 · Prithwish Kumar Das</span>
+      </div>
+      <div class="footer__center">
+        <div class="footer__status">
+          <span class="footer__status-dot"></span>
+          <span>ALL SYSTEMS NOMINAL</span>
+        </div>
+      </div>
+      <div class="footer__right">
+        <a href="#hero" class="footer__back" aria-label="Back to top">BACK TO TOP ↑</a>
+      </div>
+    </div>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
